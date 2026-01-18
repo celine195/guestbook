@@ -1,6 +1,7 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Message
+from .forms import MessageForm
 
 # 留言列表
 class MessageList(ListView):
@@ -13,11 +14,11 @@ class MessageDetail(DetailView):
 
 # 新增留言
 class MessageCreate(CreateView):
-    model = Message
-    fields = ['user', 'subject', 'content']     
-    success_url = reverse_lazy('msg_list')           
+    form_class = MessageForm
+    success_url = "/"   
+    template_name = 'form.html'      
 
 # 刪除留言
 class MessageDelete(DeleteView):
     model = Message
-    success_url = reverse_lazy('msg_list')              
+    success_url = reverse_lazy('web:message_list')              

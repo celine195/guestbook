@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <!-- 網站標誌 -->
+  <div class="navbar-brand"><i class="far fa-comment-alt"></i> 留言板</div>
+  <!-- 在小螢幕的設備上顯示可展開/收合導覽選單的按鈕 -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <!-- 導覽列選單內容(可收合) -->
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item"><a href="/" class="nav-link"><i class="fas fa-home"></i> 首頁</a></li>
+      <li class="nav-item"><a href="/message/create" class="nav-link"><i class="fas fa-edit"></i> 新增留言</a></li>
+    {% if user.is_authenticated %}
+<li class="nav-item"><form method="post" action="/accounts/logout/" style="display:inline;">{% csrf_token %}<button type="submit" class="nav-link btn btn-sm btn-primary">{{ user.username }} <i class="fas fa-sign-out-alt"></i> 登出</button></form></li>
+      {% else %}
+      <li class="nav-item"><a href="{% url 'login' %}" class="nav-link btn btn-sm btn-primary"><i class="fas fa-sign-in-alt"></i> 登入</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
